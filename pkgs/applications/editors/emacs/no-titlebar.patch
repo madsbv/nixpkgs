@@ -1,8 +1,8 @@
-
-diff -ruN mituharu-emacs-mac-85a43e7fcf73/lisp/cus-start.el mituharu-emacs-mac-patched/lisp/cus-start.el
---- mituharu-emacs-mac-85a43e7fcf73/lisp/cus-start.el	2019-03-22 01:05:44.000000000 -0400
-+++ mituharu-emacs-mac-patched/lisp/cus-start.el	2019-04-04 15:08:10.000000000 -0400
-@@ -580,6 +580,7 @@
+diff --git a/lisp/cus-start.el b/lisp/cus-start.el
+index fa12045db8..fe0319e2b4 100644
+--- a/lisp/cus-start.el
++++ b/lisp/cus-start.el
+@@ -601,6 +601,7 @@ Leaving \"Default\" unchecked is equivalent with specifying a default of
  	     (mac-pass-command-to-system mac boolean "22.1")
  	     (mac-pass-control-to-system mac boolean "22.1")
  	     (mac-drawing-use-gcd mac boolean "24.4")
@@ -10,10 +10,11 @@ diff -ruN mituharu-emacs-mac-85a43e7fcf73/lisp/cus-start.el mituharu-emacs-mac-p
  	     (mac-frame-tabbing mac (choice (const automatic) (const inverted)
                                              (const nil) (const t)) "24.5")
  	     (mac-ignore-accessibility mac boolean "25.3")
-diff -ruN mituharu-emacs-mac-85a43e7fcf73/src/macappkit.m mituharu-emacs-mac-patched/src/macappkit.m
---- mituharu-emacs-mac-85a43e7fcf73/src/macappkit.m	2019-03-22 01:05:44.000000000 -0400
-+++ mituharu-emacs-mac-patched/src/macappkit.m	2019-04-04 15:08:19.000000000 -0400
-@@ -2613,9 +2613,13 @@
+diff --git a/src/macappkit.m b/src/macappkit.m
+index 28c6b38f00..0ae299dcf3 100644
+--- a/src/macappkit.m
++++ b/src/macappkit.m
+@@ -2495,9 +2495,13 @@ - (void)setupWindow
        if (!self.shouldBeTitled)
  	windowStyle = NSWindowStyleMaskBorderless;
        else
@@ -30,10 +31,11 @@ diff -ruN mituharu-emacs-mac-85a43e7fcf73/src/macappkit.m mituharu-emacs-mac-pat
      }
    else
      windowStyle = NSWindowStyleMaskBorderless;
-diff -ruN mituharu-emacs-mac-85a43e7fcf73/src/macterm.c mituharu-emacs-mac-patched/src/macterm.c
---- mituharu-emacs-mac-85a43e7fcf73/src/macterm.c	2019-03-22 01:05:44.000000000 -0400
-+++ mituharu-emacs-mac-patched/src/macterm.c	2019-04-04 15:08:27.000000000 -0400
-@@ -6314,6 +6314,16 @@
+diff --git a/src/macterm.c b/src/macterm.c
+index 936a57d2ff..13d278eebc 100644
+--- a/src/macterm.c
++++ b/src/macterm.c
+@@ -6225,6 +6225,16 @@ tabbing is disallowed and preferred, respectively.
  This variable has no effect on OS X 10.11 and earlier.  */);
    Vmac_frame_tabbing = Qautomatic;
  

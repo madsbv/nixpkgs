@@ -12,6 +12,7 @@
 # Boolean flags
 , withNativeCompilation ? stdenv.buildPlatform.canExecute stdenv.hostPlatform
 , noGui ? false, srcRepo ? true, withAcl ? false, withAlsaLib ? false
+, noTitlebarMac ? false
 , withAthena ? false, withCsrc ? true, withGTK2 ? false
 , withGTK3 ? withPgtk && !noGui, withGconf ? false
 , withGlibNetworking ? withPgtk || withGTK3 || (withX && withXwidgets)
@@ -49,6 +50,7 @@ assert (withGTK3 && !withNS && variant != "macport") -> withX || withPgtk;
 
 assert noGui
   -> !(withX || withGTK2 || withGTK3 || withNS || variant == "macport");
+assert noTitlebarMac -> (variant == "macport");
 assert withAcl -> stdenv.isLinux;
 assert withAlsaLib -> stdenv.isLinux;
 assert withGTK2 -> !(withGTK3 || withPgtk);
@@ -84,7 +86,10 @@ in mkDerivation (finalAttrs: {
 
   inherit src;
 
-  patches = [ ./no-titlebar.patch ] ++ patches fetchpatch
+  patches = patches fetchpatch
+    ++ lib.optionals noTitlebarMac [
+      (substituteAll {
+        src = ./no-titlebar.patch })]
     ++ lib.optionals withNativeCompilation [
       (substituteAll {
         src = if lib.versionOlder finalAttrs.version "29" then
