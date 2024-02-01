@@ -89,7 +89,7 @@ in mkDerivation (finalAttrs: {
   patches = patches fetchpatch
     ++ lib.optionals noTitlebarMac [
       (substituteAll {
-        src = ./no-titlebar.patch })]
+        src = ./no-titlebar.patch; })]
     ++ lib.optionals withNativeCompilation [
       (substituteAll {
         src = if lib.versionOlder finalAttrs.version "29" then
